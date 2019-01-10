@@ -596,6 +596,12 @@ static CGFloat itemMargin = 5;
         index = indexPath.item - 1;
     }
     TZAssetModel *model = _models[index];
+    if(!tzImagePickerVc.needPreview) {
+        [tzImagePickerVc addSelectedModel:model];
+        [self doneButtonClick];
+        return;
+    }
+    
     if (model.type == TZAssetModelMediaTypeVideo && !tzImagePickerVc.allowPickingMultipleVideo) {
         if (tzImagePickerVc.selectedModels.count > 0) {
             TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
