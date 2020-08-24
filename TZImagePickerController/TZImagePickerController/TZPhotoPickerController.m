@@ -908,10 +908,14 @@ static CGFloat itemMargin = 5;
         }
     }
     _collectionView.hidden = YES;
-    [_collectionView reloadData];
-    
-    _shouldScrollToBottom = YES;
-    [self scrollCollectionViewToBottom];
+    [UIView animateWithDuration:0.0 animations:^{
+        [_collectionView reloadData];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            _shouldScrollToBottom = YES;
+            [self scrollCollectionViewToBottom];
+        }
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
